@@ -15,7 +15,6 @@ exports.up = function(knex) {
       table.string('name');
       table.string('phone');
       table.string('gender');
-      table.array('allergies');
       table.integer('doctor_id').unsigned()
       table.foreign('doctor_id')
         .references('doctor_id');
