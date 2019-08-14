@@ -25,7 +25,7 @@ const appointments = [
   },
   {
     doctor_id: 1,
-    patient_id: 1003,
+    patient_id: 1002,
     date: "09/01/2019",
     time: "10AM"
   },
@@ -79,19 +79,19 @@ const appointments = [
   },
   {
     doctor_id: 5,
-    patient_id: 1020,
+    patient_id: 1018,
     date: "08/23/2019",
     time: "1:30PM"
   },
   {
     doctor_id: 18,
-    patient_id: 1023,
+    patient_id: 1024,
     date: "08/23/2019",
     time: "12:30PM"
   },
   {
     doctor_id: 17,
-    patient_id: 1014,
+    patient_id: 1012,
     date: "09/11/2019",
     time: "9:30PM"
   },
@@ -103,13 +103,13 @@ const appointments = [
   },
   {
     doctor_id: 7,
-    patient_id: 1005,
+    patient_id: 1004,
     date: "08/16/2019",
     time: "7:30AM"
   },
   {
     doctor_id: 2,
-    patient_id: 1022,
+    patient_id: 1019,
     date: "09/29/2019",
     time: "4:30PM"
   },
@@ -175,7 +175,7 @@ const appointments = [
   },
   {
     doctor_id: 27,
-    patient_id: 1014,
+    patient_id: 1017,
     date: "11/26/2019",
     time: "10AM"
   },
@@ -187,7 +187,7 @@ const appointments = [
   },
   {
     doctor_id: 13,
-    patient_id: 1008,
+    patient_id: 1011,
     date: "08/14/2019",
     time: "8:30AM"
   },

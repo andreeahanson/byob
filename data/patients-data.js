@@ -5,7 +5,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1111",
-    email: "anne.beak@gmail.com"
+    email: "anne.beak@gmail.com",
+    doctor_id: 1
   },
   {
     id: 1001,
@@ -13,7 +14,8 @@ const patients = [
     gender: "male",
     allergies: ["Tetracycline", "Dilantin", "Tegretol (Carbamazepine)", "Penicillin", "Cephalosporins"],
     phone: "303-111-1112",
-    email: "kynan.kouma@gmail.com"
+    email: "kynan.kouma@gmail.com",
+    doctor_id: 12
   },
   {
     id: 1002,
@@ -21,7 +23,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1113",
-    email: "jessie.greenaway@gmail.com"
+    email: "jessie.greenaway@gmail.com",
+    doctor_id: 1
   },
   {
     id: 1003,
@@ -29,7 +32,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1114",
-    email: "julie.hibbert@gmail.com"
+    email: "julie.hibbert@gmail.com",
+    doctor_id: 29
   },
   {
     id: 1004,
@@ -37,7 +41,8 @@ const patients = [
     gender: "male",
     allergies: ["Cephalosporins", "Sulfonamides"],
     phone: "303-111-1115",
-    email: "zac.copeland@gmail.com"
+    email: "zac.copeland@gmail.com",
+    doctor_id: 7
   },
   {
     id: 1005,
@@ -45,7 +50,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1116",
-    email: "macy.mohammed@gmail.com"
+    email: "macy.mohammed@gmail.com",
+    doctor_id: 16
   },
   {
     id: 1006,
@@ -53,7 +59,8 @@ const patients = [
     gender: "female",
     allergies: ["Intravenous Contrast Dye"],
     phone: "303-111-1117",
-    email: "rosina.salas@gmail.com"
+    email: "rosina.salas@gmail.com",
+    doctor_id: 7
   },
   {
     id: 1007,
@@ -61,7 +68,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1118",
-    email: "erin.chase@gmail.com"
+    email: "erin.chase@gmail.com",
+    doctor_id: 3
   },
   {
     id: 1008,
@@ -69,7 +77,8 @@ const patients = [
     gender: "male",
     allergies: ["Penicillin"],
     phone: "303-111-1119",
-    email: "jamaal.workman@gmail.com"
+    email: "jamaal.workman@gmail.com",
+    doctor_id: 5
   },
   {
     id: 1009,
@@ -77,7 +86,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1120",
-    email: "freja.mcguire@gmail.com"
+    email: "freja.mcguire@gmail.com",
+    doctor_id: 13
   },
   {
     id: 1010,
@@ -85,7 +95,8 @@ const patients = [
     gender: "female",
     allergies: ["Tetracycline", "Dilantin", "Tegretol (Carbamazepine)"],
     phone: "303-111-1121",
-    email: "rhiana.kerr@gmail.com"
+    email: "rhiana.kerr@gmail.com",
+    doctor_id: 10
   },
   {
     id: 1011,
@@ -93,7 +104,8 @@ const patients = [
     gender: "male",
     allergies: ["Intravenous Contrast Dye"],
     phone: "303-111-1122",
-    email: "torin.reader@gmail.com"
+    email: "torin.reader@gmail.com",
+    doctor_id: 13
   },
   {
     id: 1012,
@@ -101,7 +113,8 @@ const patients = [
     gender: "male",
     allergies: ["Cephalosporins"],
     phone: "303-111-1123",
-    email: "hajrah.williamson@gmail.com"
+    email: "hajrah.williamson@gmail.com",
+    doctor_id: 17
   },
   {
     id: 1013,
@@ -109,7 +122,8 @@ const patients = [
     gender: "non-binary",
     allergies: ["Tetracycline", "Dilantin"],
     phone: "303-111-1124",
-    email: "jo.downes@gmail.com"
+    email: "jo.downes@gmail.com",
+    doctor_id: 9
   },
   {
     id: 1014,
@@ -117,7 +131,8 @@ const patients = [
     gender: "male",
     allergies: ["Sulfonamides", "Cromolyn Sodium", "Nedocromil Sodium", "Intravenous Contrast Dye"],
     phone: "303-111-1125",
-    email: "cristian.haas@gmail.com"
+    email: "cristian.haas@gmail.com",
+    doctor_id: 18
   },
   {
     id: 1015,
@@ -125,7 +140,8 @@ const patients = [
     gender: "male",
     allergies: [],
     phone: "303-111-1126",
-    email: "arjun.butt@gmail.com"
+    email: "arjun.butt@gmail.com",
+    doctor_id: 15
   },
   {
     id: 1016,
@@ -133,7 +149,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1127",
-    email: "kayleigh.hayward@gmail.com"
+    email: "kayleigh.hayward@gmail.com",
+    doctor_id: 16
   },
   {
     id: 1017,
@@ -141,7 +158,8 @@ const patients = [
     gender: "male",
     allergies: ["Nedocromil Sodium", "Intravenous Contrast Dye"],
     phone: "303-111-1128",
-    email: "elmer.roy@gmail.com"
+    email: "elmer.roy@gmail.com",
+    doctor_id: 27
   },
   {
     id: 1018,
@@ -149,7 +167,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1129",
-    email: "sannah.galloway@gmail.com"
+    email: "sannah.galloway@gmail.com",
+    doctor_id: 5
   },
   {
     id: 1019,
@@ -157,7 +176,8 @@ const patients = [
     gender: "female",
     allergies: ["Tetracycline", "Dilantin", "Nedocromil Sodium", "Intravenous Contrast Dye"],
     phone: "303-111-1130",
-    email: "hazel.gross@gmail.com"
+    email: "hazel.gross@gmail.com",
+    doctor_id: 2
   },
   {
     id: 1020,
@@ -165,7 +185,8 @@ const patients = [
     gender: "male",
     allergies: [],
     phone: "303-111-1131",
-    email: "zayan.yates@gmail.com"
+    email: "zayan.yates@gmail.com",
+    doctor_id: 25
   },
   {
     id: 1021,
@@ -173,7 +194,8 @@ const patients = [
     gender: "female",
     allergies: ["Penicillin"],
     phone: "303-111-1132",
-    email: "cherise.kirby@gmail.com"
+    email: "cherise.kirby@gmail.com",
+    doctor_id: 18
   },
   {
     id: 1022,
@@ -181,7 +203,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1133",
-    email: "natalia.jennings@gmail.com"
+    email: "natalia.jennings@gmail.com",
+    doctor_id: 17
   },
   {
     id: 1023,
@@ -189,7 +212,8 @@ const patients = [
     gender: "male",
     allergies: [],
     phone: "303-111-1134",
-    email: " caolan.tyson@gmail.com"
+    email: " caolan.tyson@gmail.com",
+    doctor_id: 19
   },
   {
     id: 1024,
@@ -197,7 +221,8 @@ const patients = [
     gender: "male",
     allergies: [],
     phone: "303-111-1135",
-    email: "che.aldred@gmail.com"
+    email: "che.aldred@gmail.com",
+    doctor_id: 18
   },
   {
     id: 1025,
@@ -205,7 +230,8 @@ const patients = [
     gender: "male",
     allergies: ["Tetracycline", "Dilantin", "Tegretol (Carbamazepine)"],
     phone: "303-111-1136",
-    email: "woody.fernandez@gmail.com"
+    email: "woody.fernandez@gmail.com",
+    doctor_id: 12
   },
   {
     id: 1026,
@@ -213,7 +239,8 @@ const patients = [
     gender: "female",
     allergies: [],
     phone: "303-111-1137",
-    email: "leanne.doug@gmail.com"
+    email: "leanne.doug@gmail.com",
+    doctor_id: 14
   },
   {
     id: 1027,
@@ -221,7 +248,8 @@ const patients = [
     gender: "male",
     allergies: [],
     phone: "303-111-1138",
-    email: "akshay.duran@gmail.com"
+    email: "akshay.duran@gmail.com",
+    doctor_id: 15
   },
   {
     id: 1028,
@@ -229,7 +257,8 @@ const patients = [
     gender: "female",
     allergies: ["Dilantin"],
     phone: "303-111-1139",
-    email: "danica.pemberton@gmail.com"
+    email: "danica.pemberton@gmail.com",
+    doctor_id: 2
   },
   {
     id: 1029,
@@ -237,7 +266,8 @@ const patients = [
     gender: "female",
     allergies: ["Tetracycline", "Penicillin", "Cromolyn Sodium"],
     phone: "303-111-1140",
-    email: "estelle.chambers@gmail.com"
+    email: "estelle.chambers@gmail.com",
+    doctor_id: 5
   }
   
 
