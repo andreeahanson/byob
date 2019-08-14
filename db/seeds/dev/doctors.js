@@ -1,33 +1,15 @@
+const doctorsData = require('../../../data/doctors-data.js')
+
 const createDoctor = (knex, doctor) => {
   return knex('doctors').insert({
     name: doctor.name,
     specialization: doctor.specialization,
-    phone: doctor.phone,
-    patients: doctor.patients
-  }, 'id')
-  .then((doctorId, index)=> {
-    let patientsPromisses = [];
-
-    doctor.patients.forEach(patient => {
-      patientsPromisses.push(
-        createPatient(knex, {
-          patient: patient,
-          doctor_id: doctorId[index]
-        })
-      )
-    });
-
-    return Promise.all(patientsPromisses);
+    phone: doctor.phone
   })
 };
 
-const createPatient = (knex, patient) => {
-  return knex('patients').insert(patient);
-}
-
 exports.seed = (knex) => {
-  return knex('patients').del()
-    .then(() => knex('doctors').del())
+  return knex('doctors').del()
     .then(() => {
       let doctorPromises = [];
 
