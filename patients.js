@@ -1,11 +1,11 @@
-
 const patientsData = require('./data/patients-data.js')
 
 const createPatient = (knex, patient) => {
   return knex('patients').insert({
     name: patient.name,
     phone: patient.phone,
-    gender: patient.gender
+    gender: patient.gender,
+    doctor_id: patient.doctor_id
   })
 };
 
@@ -22,4 +22,3 @@ exports.seed = (knex) => {
     })
     .catch(error => console.log(`Error seeding data: ${error}`))
 }
-

@@ -4,14 +4,14 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgress://localhost/clinique',
+    connection: 'postgres://localhost/clinique',
     migrations: {
       directory: './db/migrations'
-    },
-    useNullAsDefault: true,
+    }, 
     seeds: {
       directory: './db/seeds/dev'
     },
+    useNullAsDefault: true
   },
 
 };

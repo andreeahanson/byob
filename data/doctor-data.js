@@ -142,7 +142,10 @@ const doctorsData1 = [
     specialization: 'medical genetics',
     phone: '303-000-0011',
     patients: [
-
+      { name: 'Vicky Merck',
+      phone: '303-111-1987',
+      gender: 'female',
+    },
     ]
   },
   { name: 'Annabel Mora',
@@ -239,7 +242,14 @@ const doctorsData1 = [
     specialization: 'plastic surgery',
     phone: '404-000-0003',
     patients: [
-
+      { name: 'Gareth Milk',
+      phone: '303-111-2693',
+      gender: 'male',
+    },
+    { name: 'Micky Human',
+      phone: '303-111-2322',
+      gender: 'female',
+    },
     ]
   },
   { name: 'Lala Bods',

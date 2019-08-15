@@ -1,6 +1,6 @@
 const express = require('express');
-const doctorsData = require('./data/doctors-data.js')
-const patientsData = require('./data/patients-data.js')
+// const doctorsData = require('./data/doctors-data.js')
+// const patientsData = require('./data/patients-data.js')
 const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
