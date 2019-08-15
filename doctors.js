@@ -1,4 +1,4 @@
-const doctorsData = require('../../../data/doctors-data.js')
+const doctorsData = require('./data/doctors-data.js')
 
 const createDoctor = (knex, doctor) => {
   return knex('doctors').insert({
