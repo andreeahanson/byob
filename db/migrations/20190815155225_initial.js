@@ -17,7 +17,7 @@ exports.up = function(knex) {
       table.string('gender');
       table.integer('doctor_id').unsigned()
       table.foreign('doctor_id')
-        .references('doctor_id');
+        .references('doctors.id');
 
       table.timestamps(true, true);
     })

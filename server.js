@@ -1,6 +1,6 @@
 const express = require('express');
-const doctorsData = require('./data/doctors-data.js')
-const patientsData = require('./data/patients-data.js')
+// const doctorsData = require('./data/doctors-data.js')
+// const patientsData = require('./data/patients-data.js')
 const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
@@ -28,7 +28,7 @@ app.get('/clinique/doctors', (request, response) => {
 app.get('/clinique/doctors/:id', (request, response) => {
   database('doctors').where('id', request.params.id).select()
   .then(doctors => {
-    if(doctors.length) {
+    if(doctors) {
       response.status(200).json(doctors);
     } else {
       response.status(404).json({
@@ -41,10 +41,24 @@ app.get('/clinique/doctors/:id', (request, response) => {
   })
 })
 
-
 //GET ALL PATIENTS OF A CERTAIN DOCTOR???('/clinique/doctors/:id/patients')
+app.get('/clinique/doctors/:id/patients', (request, response) => {
+  database('patients').where('doctor_id', request.params.id).select()
+    .then(patients => {
+      response.status(200).json(patients)
+    }) 
+    .catch((error) => {
+      response.status(500).json({ error })
+    })
+})
 
 
+
+//get certain doctor
+//then, get all patients
+//then, get patients with doctors id
+
+//GET ONE CERTAIN PATIENT OF A CERTAIN DOCTOR('/clinique/doctors/:id/patients/:id)
 
 //POST PATIENT('/clinique/doctors/:id/patients')
 //PUT PATIENT ('/clinique/doctors/:id/patients/1004')
