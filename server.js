@@ -5,6 +5,12 @@ const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = "Clinique";
@@ -70,6 +76,13 @@ app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
 })
 
 
+//POST DOCTOR('/clinique/doctors)
+app.post('/clinique/doctors', (request, response) => {
+  database.insert(request.body).returning('*').into('doctors').then((data) => {
+    response.send(data);
+  })
+})
+
 //POST PATIENT('/clinique/doctors/:id/patients')
-//PUT PATIENT ('/clinique/doctors/:id/patients/1004')
+
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
