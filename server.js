@@ -84,5 +84,10 @@ app.post('/clinique/doctors', (request, response) => {
 })
 
 //POST PATIENT('/clinique/doctors/:id/patients')
+app.post('/clinique/doctors/:id/patients', (request, response) => {
+  database.insert(request.body).returning('*').into('patients').then((data) => {
+    response.send(data);
+  })
+})
 
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
