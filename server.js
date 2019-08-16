@@ -59,6 +59,16 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
 //then, get patients with doctors id
 
 //GET ONE CERTAIN PATIENT OF A CERTAIN DOCTOR('/clinique/doctors/:id/patients/:id)
+app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
+  database('patients').where('id', request.params.id).select()
+    .then(patient => {
+      response.status(200).json(patient)
+    })
+    .catch((error) => {
+      response.status(500).json({ error })
+    })
+})
+
 
 //POST PATIENT('/clinique/doctors/:id/patients')
 //PUT PATIENT ('/clinique/doctors/:id/patients/1004')
