@@ -5,6 +5,12 @@ const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.set('port', process.env.PORT || 3000);
 app.locals.title = "Clinique";
@@ -59,7 +65,35 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
 //then, get patients with doctors id
 
 //GET ONE CERTAIN PATIENT OF A CERTAIN DOCTOR('/clinique/doctors/:id/patients/:id)
+app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
+  database('patients').where('id', request.params.id).select()
+    .then(patient => {
+      response.status(200).json(patient)
+    })
+    .catch((error) => {
+      response.status(500).json({ error })
+    })
+})
+
+
+//POST DOCTOR('/clinique/doctors)
+app.post('/clinique/doctors', (request, response) => {
+  database.insert(request.body).returning('*').into('doctors').then((data) => {
+    response.send(data);
+  })
+})
 
 //POST PATIENT('/clinique/doctors/:id/patients')
-//PUT PATIENT ('/clinique/doctors/:id/patients/1004')
+app.post('/clinique/doctors/:id/patients', (request, response) => {
+  database.insert(request.body).returning('*').into('patients').then((data) => {
+    response.send(data);
+  })
+})
+
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
+app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
+  database('patients').where('id', request.params.id).del()
+    .then(() => {
+      response.json({ success: true });
+    });
+});
