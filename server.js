@@ -91,3 +91,9 @@ app.post('/clinique/doctors/:id/patients', (request, response) => {
 })
 
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
+app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
+  database('patients').where('id', request.params.id).del()
+    .then(() => {
+      response.json({ success: true });
+    });
+});
