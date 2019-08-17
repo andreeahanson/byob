@@ -33,9 +33,13 @@ app.get('/clinique/doctors', (request, response) => {
 //GET ONE DOCTOR ('/clinique/doctors/:id')
 app.get('/clinique/doctors/:id', (request, response) => {
   database('doctors').where('id', request.params.id).select()
-  .then(doctors => {
-    if(doctors) {
-      response.status(200).json(doctors);
+  .then(doctor => {
+    if(doctor.length) {
+      database('patients').where('doctor_id', request.params.id).select()
+      .then(patients => {
+        doctor[0].patients = patients
+        response.status(200).json(doctor[0]);
+      })
     } else {
       response.status(404).json({
         error: `Could not find doctor with id ${request.params.id}`
