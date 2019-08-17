@@ -23,6 +23,16 @@ app.listen(app.get('port'), () => {
 app.get('/clinique/doctors', (request, response) => {
   database('doctors').select()
     .then((doctors) => {
+      doctors.forEach(doctor => {
+        doctor = {
+          id: doctor.id,
+          name: doctor.name,
+          specialization: doctor.specialization,
+          phone: doctor.phone,
+          created_at: doctor.created_at,
+          updated_at: doctor.updated_at,
+        }
+      })
       response.status(200).json(doctors);
     })
     .catch((error) => {
