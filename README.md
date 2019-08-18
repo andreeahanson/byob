@@ -130,12 +130,125 @@ Body:
 
 *Example request*
 
-```DELETE '/clinique/doctors/1'```
+```DELETE '/clinique/doctors/414'```
 
 *Example response*
 
 ```
 {
     "success": "You have successfully deleted doctor with the id of 414"
+}
+```
+
+## PATIENT DATA ENDPOINTS
+
+#### GET all the patients of a certain doctor:
+
+```/clinique/doctors/<doctor id>/patients```
+
+*Example request*
+
+```GET '/clinique/doctors/1/patients'```
+
+*Example response*
+
+```
+[
+{
+id: 1,
+name: "Kynan Kouma",
+phone: "303-111-1112",
+gender: "male",
+doctor_id: 1,
+created_at: "2019-08-16T16:08:27.054Z",
+updated_at: "2019-08-16T16:08:27.054Z"
+},
+{
+id: 7,
+name: "Anne Beak",
+phone: "303-111-1111",
+gender: "female",
+doctor_id: 1,
+created_at: "2019-08-16T16:08:27.052Z",
+updated_at: "2019-08-16T16:08:27.052Z"
+}
+]
+```
+
+#### GET a specific patient of a certain doctor:
+
+```/clinique/doctors/<doctor id>/patients/<patient id>```
+
+*Example request*
+
+```GET '/clinique/doctors/1/patients/1'```
+
+*Example response*
+
+```
+[
+{
+id: 1,
+name: "Kynan Kouma",
+phone: "303-111-1112",
+gender: "male",
+doctor_id: 1,
+created_at: "2019-08-16T16:08:27.054Z",
+updated_at: "2019-08-16T16:08:27.054Z"
+}
+]
+```
+
+#### POST a new patient:
+
+```/clinique/doctors/<doctor id>/patients```
+
+*Example request*
+
+```POST '/clinique/doctors/1/patients'```
+
+*Required parameters*
+
+```
+Headers:  "Content-Type": "application/json"
+
+Body: 
+{
+  "name": <String>,
+  "phone": <String>,
+  "gender": <String>,
+  "doctor_id": <Integer>
+}
+```
+
+*Example response*
+
+```
+[
+    {
+        "id": 1,
+        "name": "Anne Beak",
+        "phone": "303-111-1111",
+        "gender": "female",
+        "doctor_id": 1,
+        "created_at": "2019-08-18T06:28:43.957Z",
+        "updated_at": "2019-08-18T06:28:43.957Z"
+    }
+]
+```
+
+#### DELETE a  patient of a certain doctor:
+
+```/clinique/doctors/<doctor id>/patients/1```
+
+*Example request*
+
+```DELETE '/clinique/doctors/1/patients/1'```
+
+*Example response*
+
+```
+{
+    "success": "You have successfully deleted patient with the id of 1"
 }
 ```
