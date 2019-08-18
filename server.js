@@ -96,40 +96,40 @@ app.get('/clinique/doctors/:id/patients/:id', (request, response) => {// request
 
 
 //POST DOCTOR('/clinique/doctors)
-app.post('/clinique/doctors', (request, response) => {
-  let data = request.body
-  for(let requiredParameter of ['name', 'phone', 'specialization']) {
-    if(!data[requiredParameter]) {
-      return response.status(422).json({
+app.post('/clinique/doctors', (request, response) => { // perform a post request to add a new doctor using the 'clinique/doctors' endpoint
+  let data = request.body // asign a variable to the request body
+  for(let requiredParameter of ['name', 'phone', 'specialization']) { // asign a variable of requiredParameter to the "name", "phone" or "specialization" keys
+    if(!data[requiredParameter]) { // if the request body doesn't have a key of requiredParameter
+      return response.status(422).json({ // return an http 422 bad response and an error message in json format, mentioning with key is missing from the request body
         error: `Expected format: { name: <String>, specialization: <String>, phone: <String> }. You're missing a ${requiredParameter} property.`
       })
     }
   }
-  database.insert(request.body).returning('*').into('doctors')
+  database.insert(request.body).returning('*').into('doctors') // insert the new doctor record in the database, into the doctors table
   .then((data) => {
-    response.status(201).json(data);
+    response.status(201).json(data); // then, if it was successful, send an http 201 response with the new doctor object in json format
   })
   .catch((error) => {
-    response.status(500).json({ error })
+    response.status(500).json({ error })// if there is any error that occurs in the promises above, send a 500 response as a server error
   })
 })
 
 //POST PATIENT('/clinique/doctors/:id/patients')
-app.post('/clinique/doctors/:id/patients', (request, response) => {
-  let data = request.body;
-  for(let requiredParameter of ['name', 'phone', 'gender', 'doctor_id']) {
-    if(!data[requiredParameter]) {
-      return response.status(422).json({
+app.post('/clinique/doctors/:id/patients', (request, response) => {// perform a post request to add a new patient of a certain doctor using the 'clinique/doctors/:id/patients' endpoint
+  let data = request.body; // asign a variable to the request body
+  for(let requiredParameter of ['name', 'phone', 'gender', 'doctor_id']) {// asign a variable of requiredParameter to the "name", "phone", "gender" or "doctor_id" keys
+    if(!data[requiredParameter]) {// if the request body doesn't have a key of requiredParameter
+      return response.status(422).json({// return an http 422 bad response and an error message in json format, mentioning with key is missing from the request body
         error: `Expected format: { name: <String>, phone: <String>, gender: <String>, doctor_id: <Integer> }. You're missing a ${requiredParameter} property.`
       })
     }
   }
-  database.insert(request.body).returning('*').into('patients')
+  database.insert(request.body).returning('*').into('patients')// insert the new patient record in the database, into the patients table
   .then((data) => {
-    response.status(201).json(data);
+    response.status(201).json(data); // then, if it was successful, send an http 201 response with the new patient object in json format
   })
   .catch((error) => {
-    response.status(500).json({ error })
+    response.status(500).json({ error })// if there is any error that occurs in the promises above, send a 500 response as a server error
   })
 })
 
