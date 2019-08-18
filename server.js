@@ -44,7 +44,7 @@ app.get('/clinique/doctors/:id', (request, response) => {
         response.status(200).json(doctor[0]);
       })
     } else {
-      response.status(400).json({
+      response.status(404).json({
         error: `Could not find doctor with id ${request.params.id}`
       })
     }
@@ -79,10 +79,10 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
 app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
   database('patients').where('id', request.params.id).select()
     .then(patient => {
-      if(patient) {
+      if(patient.length) {
         response.status(200).json(patient)
       } else {
-        response.status(400).json({ 
+        response.status(404).json({ 
           error: `Could not find patient with id ${request.params.id}`
         })
       }
@@ -117,13 +117,13 @@ app.post('/clinique/doctors/:id/patients', (request, response) => {
 
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
 app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
-  const { id } = response.params
+  const { id } = request.params
   database('patients').where('id', id).del()
-    .then(() => {
-      if(patients) {
-        response.json({ success: `You have successfully deleted patient with the id of ${id}`});
+    .then((patient) => {
+      if(patient.name) {
+        response.status(200).json({ success: `You have successfully deleted patient with the id of ${id}`});
       } else {
-        response.status(400).json({
+        response.status(404).json({
           error: `Could not find patient with the id of ${id}`
         })
       }
@@ -135,12 +135,13 @@ app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
 
 //DELETE DOCTOR('/clinique/doctors/:id')
 app.delete('/clinique/doctors/:id', (request, response) => {
-  database('doctors').where('id', request.params.id).del()
-    .then(() => {
-      if(doctors) {
+  const { id } = request.params
+  database('doctors').where('id', id).del()
+    .then((doctor) => {
+      if(doctor.name) {
         response.json({ success: `You have successfully deleted doctor with the id of ${id}`});
       } else {
-        response.status(400).json({
+        response.status(404).json({
           error: `Could not find doctor with the id of ${id}`
         })
       }
