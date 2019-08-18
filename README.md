@@ -8,7 +8,7 @@ https://byob-clinique.herokuapp.com
 
 ## DOCTOR DATA ENDPOINTS
 
-GET all the doctors:
+#### GET all the doctors:
 
 ```/clinique/doctors```
 
@@ -47,7 +47,7 @@ updated_at: "2019-08-16T16:08:26.990Z"
 ]
 ```
 
-GET a specific doctor:
+#### GET a specific doctor:
 
 ```/clinique/doctors/<doctor id>```
 
@@ -88,7 +88,7 @@ updated_at: "2019-08-16T16:08:27.052Z"
 }
 ```
 
-POST a new doctor:
+#### POST a new doctor:
 
 ```/clinique/doctors```
 
@@ -124,7 +124,7 @@ Body:
 ]
 ```
 
-DELETE a  doctor:
+#### DELETE a  doctor:
 
 ```/clinique/doctors/<doctor id>```
 
