@@ -134,32 +134,33 @@ app.post('/clinique/doctors/:id/patients', (request, response) => {// perform a 
 })
 
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
-app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
-  const { id } = request.params
-  database('patients').where('id', id).del()
+app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {// perform a delete request to delete a patient of a certain doctor using the 'clinique/doctors/:id/patients/:id' endpoint
+  const { id } = request.params // deconstruct the request params object and assign the id to a variable
+  database('patients').where('id', id).del() // from the patients table in the database, select the patient with the id matcing the id in the request params and delete them
     .then((patient) => {
-      if(patient) {
-        response.status(200).json({ success: `You have successfully deleted patient with the id of ${id}`});
+      if(patient) { // if a patient was found
+        response.status(200).json({ success: `You have successfully deleted patient with the id of ${id}`}); // send a 200 status and a success message in the json format
       } else {
-        response.status(404).json({
+        response.status(404).json({ // otherwise, send a 404 not found response, with an error message in json format
           error: `Could not find patient with the id of ${id}`
         })
       }
     })
     .catch((error) => {
-      response.status(500).json({ error })
+      response.status(500).json({ error })// if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 });
 
 //DELETE DOCTOR('/clinique/doctors/:id')
-app.delete('/clinique/doctors/:id', (request, response) => {
-  const { id } = request.params
-  const deleteDocsAndPatients = [ database('patients').where('doctor_id', id).del(), database('doctors').where('id', id).del()]
+app.delete('/clinique/doctors/:id', (request, response) => {// perform a delete request to delete a doctor and all of their patients using the 'clinique/doctors/:id' endpoint
+  const { id } = request.params // deconstruct the request params object and assign the id to a variable
+  const deleteDocsAndPatients = [ database('patients').where('doctor_id', id).del(), database('doctors').where('id', id).del()] // create an array of promises, first to delete all the patients for which doctor_id matches the id in the request params
+  // and second, to delete the doctor from the database
   Promise.all(deleteDocsAndPatients)
     .then(() => {
-      response.json({ success: `You have successfully deleted doctor with the id of ${id}`});
+      response.status(200).json({ success: `You have successfully deleted doctor with the id of ${id}`}); // if the delete was successfull, send a 200 message and a success message in json format
     })
     .catch((error) => {
-      response.status(500).json({ error })
+      response.status(500).json({ error }) // if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 });
