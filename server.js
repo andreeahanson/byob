@@ -150,16 +150,10 @@ app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
 //DELETE DOCTOR('/clinique/doctors/:id')
 app.delete('/clinique/doctors/:id', (request, response) => {
   const { id } = request.params
-  database('patients').where('doctor_id', id).del()
-  database('doctors').where('id', id).del()
-    .then((doctor) => {
-      if(doctor.name) {
-        response.json({ success: `You have successfully deleted doctor with the id of ${id}`});
-      } else {
-        response.status(404).json({
-          error: `Could not find doctor with the id of ${id}`
-        })
-      }
+  const deleteDocsAndPatients = [ database('patients').where('doctor_id', id).del(), database('doctors').where('id', id).del()]
+  Promise.all(deleteDocsAndPatients)
+    .then(() => {
+      response.json({ success: `You have successfully deleted doctor with the id of ${id}`});
     })
     .catch((error) => {
       response.status(500).json({ error })
