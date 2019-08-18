@@ -1,19 +1,19 @@
-const express = require('express');
-const app = express();
-const environment = process.env.NODE_ENV || 'development';
-const configuration = require('./knexfile')[environment];
-const database = require('knex')(configuration);
-const bodyParser = require('body-parser');
+const express = require('express'); //require express 
+const app = express(); //create an instance of the express app
+const environment = process.env.NODE_ENV || 'development'; //establish the environment
+const configuration = require('./knexfile')[environment]; // require knexfile
+const database = require('knex')(configuration); // require knex
+const bodyParser = require('body-parser'); // require body-parser
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // getting the server to expect json format
 app.use(bodyParser.urlencoded({
   extended: true
-}));
+})); 
 
-app.set('port', process.env.PORT || 3000);
-app.locals.title = "Clinique";
+app.set('port', process.env.PORT || 3000); // set the port to default 3000, or the one provided by heroku
+app.locals.title = "Clinique"; // give a name to the local server
 
-app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => { // make the server listent on the port above
   console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
 })
 
