@@ -1,6 +1,4 @@
 const express = require('express');
-// const doctorsData = require('./data/doctors-data.js')
-// const patientsData = require('./data/patients-data.js')
 const app = express();
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
@@ -61,7 +59,7 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
       if(patients.length) {
         response.status(200).json(patients)
       } else {
-        response.status(400).json({ error })
+        response.status(404).json({ error: 'Couldn\'t find patients for this doctor' })
       }
     }) 
     .catch((error) => {
@@ -95,23 +93,39 @@ app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
 
 //POST DOCTOR('/clinique/doctors)
 app.post('/clinique/doctors', (request, response) => {
+  let data = request.body
+  for(let requiredParameter of ['name', 'phone', 'specialization']) {
+    if(!data[requiredParameter]) {
+      return response.status(422).json({
+        error: `Expected format: { name: <String>, specialization: <String>, phone: <String> }. You're missing a ${requiredParameter} property.`
+      })
+    }
+  }
   database.insert(request.body).returning('*').into('doctors')
   .then((data) => {
     response.status(201).json(data);
   })
   .catch((error) => {
-    response.status(422).json({ error })
+    response.status(500).json({ error })
   })
 })
 
 //POST PATIENT('/clinique/doctors/:id/patients')
 app.post('/clinique/doctors/:id/patients', (request, response) => {
+  let data = request.body;
+  for(let requiredParameter of ['name', 'phone', 'gender', 'doctor_id']) {
+    if(!data[requiredParameter]) {
+      return response.status(422).json({
+        error: `Expected format: { name: <String>, phone: <String>, gender: <String>, doctor_id: <Integer> }. You're missing a ${requiredParameter} property.`
+      })
+    }
+  }
   database.insert(request.body).returning('*').into('patients')
   .then((data) => {
     response.status(201).json(data);
   })
   .catch((error) => {
-    response.status(422).json({ error })
+    response.status(500).json({ error })
   })
 })
 
@@ -120,7 +134,7 @@ app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
   const { id } = request.params
   database('patients').where('id', id).del()
     .then((patient) => {
-      if(patient.name) {
+      if(patient) {
         response.status(200).json({ success: `You have successfully deleted patient with the id of ${id}`});
       } else {
         response.status(404).json({
@@ -136,6 +150,7 @@ app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
 //DELETE DOCTOR('/clinique/doctors/:id')
 app.delete('/clinique/doctors/:id', (request, response) => {
   const { id } = request.params
+  database('patients').where('doctor_id', id).del()
   database('doctors').where('id', id).del()
     .then((doctor) => {
       if(doctor.name) {
