@@ -4,7 +4,7 @@ const environment = process.env.NODE_ENV || 'development'; //establish the envir
 const configuration = require('./knexfile')[environment]; // require knexfile
 const database = require('knex')(configuration); // require knex
 const bodyParser = require('body-parser');  // require body-parser 
-                                            // body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body as something easier to interface with
+// body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body as something easier to interface with
 app.use(bodyParser.json()); // getting the server to expect json format
 app.use(bodyParser.urlencoded({ // tells the system that you want json to be used
   extended: true // if extended: true, then you can parse nested objects
@@ -70,12 +70,6 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {// request the
       response.status(500).json({ error }) // if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 })
-
-
-
-//get certain doctor
-//then, get all patients
-//then, get patients with doctors id
 
 //GET ONE CERTAIN PATIENT OF A CERTAIN DOCTOR('/clinique/doctors/:id/patients/:id)
 app.get('/clinique/doctors/:id/patients/:id', (request, response) => {// request the record of a certain patioent of a specific doctor with a specific id from the 'clinique/doctors/:id/patients/:id' endpoint through the GET method
