@@ -2,7 +2,7 @@
 
 This API consists of data on doctors and the patients of each doctor in the clinic. New doctors can be added, as well as new patients of a doctor can be added. *Each doctor can have several patients, but the each patient will only have one doctor.* Doctors and patients can be removed from the database. API access is through HTTP. Data is sent and received as JSON.
 
-#### URL:
+### URL:
 
 https://byob-clinique.herokuapp.com
 
