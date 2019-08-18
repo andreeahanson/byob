@@ -3,11 +3,11 @@ const app = express(); //create an instance of the express app
 const environment = process.env.NODE_ENV || 'development'; //establish the environment
 const configuration = require('./knexfile')[environment]; // require knexfile
 const database = require('knex')(configuration); // require knex
-const bodyParser = require('body-parser'); // require body-parser
-
+const bodyParser = require('body-parser');  // require body-parser 
+                                            // body-parser extracts the entire body portion of an incoming request stream and exposes it on req.body as something easier to interface with
 app.use(bodyParser.json()); // getting the server to expect json format
-app.use(bodyParser.urlencoded({
-  extended: true
+app.use(bodyParser.urlencoded({ // tells the system that you want json to be used
+  extended: true // if extended: true, then you can parse nested objects
 })); 
 
 app.set('port', process.env.PORT || 3000); // set the port to default 3000, or the one provided by heroku
