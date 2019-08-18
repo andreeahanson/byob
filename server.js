@@ -18,52 +18,56 @@ app.listen(app.get('port'), () => { // make the server listent on the port above
 })
 
 //GET ALL DOCTORS ('/clinique/doctors')
-app.get('/clinique/doctors', (request, response) => {
-  database('doctors').select()
+app.get('/clinique/doctors', (request, response) => { // request the records of all doctors from the 'clinique/doctors/' endpoint through the GET method
+  database('doctors').select() // select all the doctors in the doctors table from the database
     .then((doctors) => {
-      doctors.forEach(doctor => {
-       delete doctor.patients
-      })
-      response.status(200).json(doctors);
+      if(doctors) { // if there are records of doctors,
+        doctors.forEach(doctor => {
+         delete doctor.patients // delete the key "patients" from the returned response for each doctor
+        })
+        response.status(200).json(doctors); // and send http response 200 (status ok) and the doctors records in json format
+      } else {
+        response.status(404).json('No doctors found.') // otherwise, send back an http 404 response, saying that there were no doctors found
+      }
     })
     .catch((error) => {
-      response.status(500).json({ error });
+      response.status(500).json({ error }); // if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 })
 
 //GET ONE DOCTOR ('/clinique/doctors/:id')
-app.get('/clinique/doctors/:id', (request, response) => {
-  database('doctors').where('id', request.params.id).select()
+app.get('/clinique/doctors/:id', (request, response) => {// request the record of a specific doctor with a specific id from the 'clinique/doctors/:id' endpoint through the GET method
+  database('doctors').where('id', request.params.id).select() // search the database for the doctor in the doctors table that has the id matching with the one in the request params, and select them
   .then(doctor => {
-    if(doctor.length) {
-      database('patients').where('doctor_id', request.params.id).select()
+    if(doctor.length) { // if a doctor was found
+      database('patients').where('doctor_id', request.params.id).select() // search the db for the patients whose key of "doctor_id" also matches the id in the request params, and select them
       .then(patients => {
-        doctor[0].patients = patients
-        response.status(200).json(doctor[0]);
+        doctor[0].patients = patients // add a new key to the doctor object and assign it the value of the found array of patients
+        response.status(200).json(doctor[0]); // send an http 200 response and the doctor record in json format
       })
     } else {
-      response.status(404).json({
+      response.status(404).json({ // if a doctor was not found, send a 404 'not found' error in json format
         error: `Could not find doctor with id ${request.params.id}`
       })
     }
   })
   .catch(error => {
-    response.status(500).json({ error });
+    response.status(500).json({ error }); // if there is any error that occurs in the promises above, send a 500 response as a server error
   })
 })
 
 //GET ALL PATIENTS OF A CERTAIN DOCTOR???('/clinique/doctors/:id/patients')
-app.get('/clinique/doctors/:id/patients', (request, response) => {
-  database('patients').where('doctor_id', request.params.id).select()
+app.get('/clinique/doctors/:id/patients', (request, response) => {// request the record of the patioents of a specific doctor with a specific id from the 'clinique/doctors/:id/patients' endpoint through the GET method
+  database('patients').where('doctor_id', request.params.id).select() // from the patients table in the data base, select the patients for which the doctor_id value matches the id in the request params
     .then(patients => {
-      if(patients.length) {
-        response.status(200).json(patients)
+      if(patients.length) { // then, if patients are found, 
+        response.status(200).json(patients) // send a 200 ok resonse back, and the array of patients in json format
       } else {
-        response.status(404).json({ error: 'Couldn\'t find patients for this doctor' })
+        response.status(404).json({ error: 'Couldn\'t find patients for this doctor' }) // otherwise, display a 404 not found message
       }
     }) 
     .catch((error) => {
-      response.status(500).json({ error })
+      response.status(500).json({ error }) // if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 })
 
@@ -74,19 +78,19 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
 //then, get patients with doctors id
 
 //GET ONE CERTAIN PATIENT OF A CERTAIN DOCTOR('/clinique/doctors/:id/patients/:id)
-app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
-  database('patients').where('id', request.params.id).select()
+app.get('/clinique/doctors/:id/patients/:id', (request, response) => {// request the record of a certain patioent of a specific doctor with a specific id from the 'clinique/doctors/:id/patients/:id' endpoint through the GET method
+  database('patients').where('id', request.params.id).select() // select from the patients table in the database the patient for which the id value matches the one of the id in the request params
     .then(patient => {
-      if(patient.length) {
-        response.status(200).json(patient)
+      if(patient.length) { // if a patient was found,
+        response.status(200).json(patient) // send a 200 response and the found patient in json format
       } else {
-        response.status(404).json({ 
-          error: `Could not find patient with id ${request.params.id}`
+        response.status(404).json({ // otherwise, send a 404 not found response, with an error message in json format
+          error: `Could not find patient with id ${request.params.id}` 
         })
       }
     })
     .catch((error) => {
-      response.status(500).json({ error })
+      response.status(500).json({ error })// if there is any error that occurs in the promises above, send a 500 response as a server error
     })
 })
 
