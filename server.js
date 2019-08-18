@@ -44,7 +44,7 @@ app.get('/clinique/doctors/:id', (request, response) => {
         response.status(200).json(doctor[0]);
       })
     } else {
-      response.status(404).json({
+      response.status(400).json({
         error: `Could not find doctor with id ${request.params.id}`
       })
     }
@@ -58,7 +58,11 @@ app.get('/clinique/doctors/:id', (request, response) => {
 app.get('/clinique/doctors/:id/patients', (request, response) => {
   database('patients').where('doctor_id', request.params.id).select()
     .then(patients => {
-      response.status(200).json(patients)
+      if(patients.length) {
+        response.status(200).json(patients)
+      } else {
+        response.status(400).json({ error })
+      }
     }) 
     .catch((error) => {
       response.status(500).json({ error })
@@ -75,7 +79,13 @@ app.get('/clinique/doctors/:id/patients', (request, response) => {
 app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
   database('patients').where('id', request.params.id).select()
     .then(patient => {
-      response.status(200).json(patient)
+      if(patient) {
+        response.status(200).json(patient)
+      } else {
+        response.status(400).json({ 
+          error: `Could not find patient with id ${request.params.id}`
+        })
+      }
     })
     .catch((error) => {
       response.status(500).json({ error })
@@ -85,22 +95,57 @@ app.get('/clinique/doctors/:id/patients/:id', (request, response) => {
 
 //POST DOCTOR('/clinique/doctors)
 app.post('/clinique/doctors', (request, response) => {
-  database.insert(request.body).returning('*').into('doctors').then((data) => {
-    response.send(data);
+  database.insert(request.body).returning('*').into('doctors')
+  .then((data) => {
+    response.status(201).json(data);
+  })
+  .catch((error) => {
+    response.status(422).json({ error })
   })
 })
 
 //POST PATIENT('/clinique/doctors/:id/patients')
 app.post('/clinique/doctors/:id/patients', (request, response) => {
-  database.insert(request.body).returning('*').into('patients').then((data) => {
-    response.send(data);
+  database.insert(request.body).returning('*').into('patients')
+  .then((data) => {
+    response.status(201).json(data);
+  })
+  .catch((error) => {
+    response.status(422).json({ error })
   })
 })
 
 //DELETE PATIENT ('/clinique/doctors/:id/patiens/1004')
 app.delete('/clinique/doctors/:id/patients/:id', (request, response) => {
-  database('patients').where('id', request.params.id).del()
+  const { id } = response.params
+  database('patients').where('id', id).del()
     .then(() => {
-      response.json({ success: true });
-    });
+      if(patients) {
+        response.json({ success: `You have successfully deleted patient with the id of ${id}`});
+      } else {
+        response.status(400).json({
+          error: `Could not find patient with the id of ${id}`
+        })
+      }
+    })
+    .catch((error) => {
+      response.status(500).json({ error })
+    })
+});
+
+//DELETE DOCTOR('/clinique/doctors/:id')
+app.delete('/clinique/doctors/:id', (request, response) => {
+  database('doctors').where('id', request.params.id).del()
+    .then(() => {
+      if(doctors) {
+        response.json({ success: `You have successfully deleted doctor with the id of ${id}`});
+      } else {
+        response.status(400).json({
+          error: `Could not find doctor with the id of ${id}`
+        })
+      }
+    })
+    .catch((error) => {
+      response.status(500).json({ error })
+    })
 });
