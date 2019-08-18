@@ -14,7 +14,7 @@ GET all the doctors:
 
 *Example request*
 
-GET '/clinique/doctors'
+```GET '/clinique/doctors'```
 
 *Example response*
 
@@ -53,7 +53,7 @@ GET a specific doctor:
 
 *Example request*
 
-GET '/clinique/doctors/1'
+```GET '/clinique/doctors/1'```
 
 *Example response*
 
@@ -87,3 +87,40 @@ updated_at: "2019-08-16T16:08:27.052Z"
 ]
 }
 ```
+
+POST a new doctor:
+
+```/clinique/doctors```
+
+*Example request*
+
+```POST '/clinique/doctors'```
+
+*Required parameters*
+
+```
+Headers:  "Content-Type": "application/json"
+
+Body: 
+{
+  "name": <String>,
+  "specialization" : <String>,
+  "phone": <String>
+}
+```
+
+*Example response*
+
+```
+[
+    {
+        "id": 414,
+        "name": "Fred Flinstone",
+        "specialization": "general medicine",
+        "phone": "303-000-7777",
+        "created_at": "2019-08-18T06:18:36.193Z",
+        "updated_at": "2019-08-18T06:18:36.193Z"
+    }
+]
+```
+
