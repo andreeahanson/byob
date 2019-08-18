@@ -124,3 +124,18 @@ Body:
 ]
 ```
 
+DELETE a  doctor:
+
+```/clinique/doctors/<doctor id>```
+
+*Example request*
+
+```DELETE '/clinique/doctors/1'```
+
+*Example response*
+
+```
+{
+    "success": "You have successfully deleted doctor with the id of 414"
+}
+```
