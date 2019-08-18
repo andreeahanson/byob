@@ -239,7 +239,7 @@ Body:
 
 #### DELETE a  patient of a certain doctor:
 
-```/clinique/doctors/<doctor id>/patients/1```
+```/clinique/doctors/<doctor id>/patients/<patient id>```
 
 *Example request*
 
