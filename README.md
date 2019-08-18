@@ -46,3 +46,44 @@ updated_at: "2019-08-16T16:08:26.990Z"
 }
 ]
 ```
+
+GET a specific doctor:
+
+```/clinique/doctors/<doctor id>```
+
+*Example request*
+
+GET '/clinique/doctors/1'
+
+*Example response*
+
+```
+{
+id: 1,
+name: "Freddie Bassett",
+specialization: "general medicine",
+phone: "303-000-0000",
+created_at: "2019-08-16T16:08:26.976Z",
+updated_at: "2019-08-16T16:08:26.976Z",
+patients: [
+{
+id: 1,
+name: "Kynan Kouma",
+phone: "303-111-1112",
+gender: "male",
+doctor_id: 1,
+created_at: "2019-08-16T16:08:27.054Z",
+updated_at: "2019-08-16T16:08:27.054Z"
+},
+{
+id: 7,
+name: "Anne Beak",
+phone: "303-111-1111",
+gender: "female",
+doctor_id: 1,
+created_at: "2019-08-16T16:08:27.052Z",
+updated_at: "2019-08-16T16:08:27.052Z"
+}
+]
+}
+```
