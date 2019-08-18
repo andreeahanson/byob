@@ -199,7 +199,7 @@ updated_at: "2019-08-16T16:08:27.054Z"
 ]
 ```
 
-#### POST a new patient:
+#### POST a new patient of an existing doctor:
 
 ```/clinique/doctors/<doctor id>/patients```
 
