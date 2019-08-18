@@ -18,7 +18,8 @@ GET '/clinique/doctors'
 
 *Example response*
 
-```[
+```
+[
 {
 id: 1,
 name: "Freddie Bassett",
@@ -43,4 +44,5 @@ phone: "303-000-0002",
 created_at: "2019-08-16T16:08:26.990Z",
 updated_at: "2019-08-16T16:08:26.990Z"
 }
-]```
+]
+```
